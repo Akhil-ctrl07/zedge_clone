@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallpaperHub - Premium Wallpapers</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">WallpaperHub</h1>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search wallpapers..." class="search-input">
+                <button class="search-btn" id="searchBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+            </div>
+            <button class="upload-btn" id="uploadBtn">Upload</button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="category-filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="nature">Nature</button>
+                <button class="filter-btn" data-category="abstract">Abstract</button>
+                <button class="filter-btn" data-category="animals">Animals</button>
+                <button class="filter-btn" data-category="city">City</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Results Info -->
+            <div class="results-info">
+                <span id="resultsCount">24 wallpapers</span>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </button>
+                    <button class="view-btn" data-view="list">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="8" y1="6" x2="21" y2="6"></line>
+                            <line x1="8" y1="12" x2="21" y2="12"></line>
+                            <line x1="8" y1="18" x2="21" y2="18"></line>
+                            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wallpaper Grid -->
+            <div class="wallpaper-grid" id="wallpaperGrid">
+                <!-- Wallpapers will be dynamically loaded here -->
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <h3>No wallpapers found</h3>
+                <p>Try adjusting your search terms or browse different categories</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <h3 class="modal-title" id="modalTitle"></h3>
+                <p class="modal-category" id="modalCategory"></p>
+                <div class="modal-actions">
+                    <button class="download-btn" id="downloadBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7,10 12,15 17,10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download
+                    </button>
+                    <button class="share-btn" id="shareBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-overlay" id="uploadModalOverlay"></div>
+        <div class="modal-content upload-modal-content">
+            <button class="modal-close" id="uploadModalClose">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="upload-form">
+                <h2>Upload Wallpaper</h2>
+                <div class="upload-area" id="uploadArea">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17,8 12,3 7,8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p>Drag and drop your image here or click to browse</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+                <div class="upload-details" id="uploadDetails" style="display: none;">
+                    <input type="text" id="uploadTitle" placeholder="Wallpaper title" class="upload-input">
+                    <select id="uploadCategory" class="upload-input">
+                        <option value="">Select category</option>
+                        <option value="nature">Nature</option>
+                        <option value="abstract">Abstract</option>
+                        <option value="animals">Animals</option>
+                        <option value="city">City</option>
+                    </select>
+                    <input type="text" id="uploadTags" placeholder="Tags (comma separated)" class="upload-input">
+                    <button class="submit-upload-btn" id="submitUpload">Upload Wallpaper</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading" id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
